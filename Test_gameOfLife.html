@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <title>jsUnit test</title>
+        <script language="JavaScript" src="jsunit/app/jsUnitCore.js"></script>
+        <script language="JavaScript" src="ConwaysGameOfLife.js"></script>
+        <script language="JavaScript">
+//I want to  create a universe
+//I want to give the universe an initial state
+//I want to be able to read if a cell is dead or alive
+        function test_universe_initially_receives_no_live_cells_any_cell_is_dead(){
+            var initialState = [];
+            var universe = new Universe(initialState);
+            assertFalse("cell 0,0 must be dead",universe.hasLife(0,0));//this does not test all possibilities
+        }
+
+        function test_universe_initially_receives_one_live_cell_has_life_in_that_cell(){
+            var initialState = [[0,0]];
+            var universe = new Universe(initialState);
+            assertTrue("cell 0,0 must be alive",universe.hasLife(0,0));
+        }
+
+        function test_universe_initially_receives_two_live_cell_has_life_in_those_cells(){
+            var initialState = [[0,0],[1,1]];
+            var universe = new Universe(initialState);
+            assertTrue("cell must be alive",universe.hasLife(0,0));
+            assertTrue("cell must be alive",universe.hasLife(1,1));
+        }
+//I want to be able to know how many neighbours a cell has
+        function test_universe_initially_receives_no_live_cells_any_cell_has_zero_neighbors(){
+            var initialState = [];
+            var universe = new Universe(initialState);
+            assert("cell must have zero neighbours",universe.getNeighbourCount(0,0) == 0);//this does not test all possibilities
+        }
+        function test_universe_initially_receives_two_neighbour_cells_returns_NeighbourCount_1_for_any_of_them(){
+            var initialState = [[0,0],[1,1]];
+            var universe = new Universe(initialState);
+            assert("cell must have 1 neighbour",universe.getNeighbourCount(0,0) == 1);
+            assert("cell must have 1 neighbour",universe.getNeighbourCount(1,1) == 1);
+        }
+        function test_universe_initially_receives_two_nonneighbouring_cells_returns_NeighbourCount_0_for_any_of_them(){
+            var initialState = [[0,0],[2,2]];
+            var universe = new Universe(initialState);
+            assert("cell must have 0 neighbours",universe.getNeighbourCount(0,0) == 0);
+            assert("cell must have 0 neighbours",universe.getNeighbourCount(2,2) == 0);
+        }
+        function test_universe_initially_receives_three_neighbour_cells_returns_NeighbourCount_2_for_any_of_them(){
+            var initialState = [[0,0],[0,1],[1,1]];
+            var universe = new Universe(initialState);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(0,0) == 2);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(0,1) == 2);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(1,1) == 2);
+        }
+        function test_universe_receives_square_cell_formation_returns_NeighbourCount_3_for_any_of_them(){
+            var initialState = [[0,0],[0,1],[1,1],[1,0]];
+            var universe = new Universe(initialState);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(0,0) == 3);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(0,1) == 3);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(1,1) == 3);
+            assert("cell must have 2 neighbours",universe.getNeighbourCount(1,0) == 3);
+        }
+        function test_universe_receives_three_sided_square_formation_cells_returns_NeighbourCount_8_for_middle_cell(){
+            var initialState = [[0,0],[0,1],[1,1],[1,0],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
+            var universe = new Universe(initialState);
+            
+            assert("middle cell must have 8 neighbours",universe.getNeighbourCount(0,0) == 8);
+        }
+
+//RULE 1: Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+        function test_tick_one_live_cell_with_no_neighbours_dies(){
+            var initialState = [[0,0]];
+            var universe = new Universe(initialState);
+            universe.tick();
+            assertFalse("cell must be dead",universe.hasLife(0,0));
+        }
+        function test_tick_one_live_cell_with_one_neighbour_dies(){
+            var initialState = [[0,0],[1,1]];
+            var universe = new Universe(initialState);
+            universe.tick();
+            assertFalse("cell must be dead",universe.hasLife(0,0));
+        }
+
+
+//RULE 2: Any live cell with two or three live neighbours lives on to the next generation.
+        function test_tick_one_live_cell_with_two_neighbours_lives(){
+            var initialState = [[0,0],[1,1],[0,1]];
+            var universe = new Universe(initialState);
+
+            universe.tick();
+            assertTrue("cell must be alive",universe.hasLife(0,0));
+        }
+        function test_tick_one_live_cell_with_three_neighbours_dies(){
+            var initialState = [[0,0],[1,1],[0,1],[1,0]];
+            var universe = new Universe(initialState);
+
+            universe.tick();
+            assertTrue("cell must be alive",universe.hasLife(0,0));
+        }        
+
+//RULE 3:Any live cell with more than three live neighbours dies, as if by overcrowding.
+        function test_tick_one_live_cell_with_four_neighbours_dies(){
+            var initialState = [[0,0],[1,1],[0,1],[1,0],[-1,0]];
+            var universe = new Universe(initialState);
+
+            universe.tick();
+            assertFalse("cell must be dead",universe.hasLife(0,0));
+        }
+
+
+//RULE 4:Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.  
+
+
+
+        </script>
+    </head>
+    <body>
+            tests file
+    </body>
+</html>
