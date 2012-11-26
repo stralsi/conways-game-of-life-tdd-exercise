@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Conway's game of life</title>
+</head>
+<body onLoad="setup();" background="#cccccc">
+	<canvas id="containerCanvas" />
+	<script type="text/javascript" src="ConwaysGameOfLife.js"></script>
+	<script type="text/javascript">
+		
+		var cellSize = 10;
+		var visibleUniverse = 10;
+		containerCanvas.width = cellSize * visibleUniverse;
+		containerCanvas.height = cellSize * visibleUniverse;
+
+		var universe;
+		function setup(){
+			this.universe = new Universe([[0,0],[0,1],[0,2]]);
+			setInterval(draw,1000);
+		}
+
+		function draw(){
+			context = containerCanvas.getContext('2d');
+			context.clearRect ( 0 , 0 , containerCanvas.width , containerCanvas.height );
+			context.fillStyle = "rgba(100,100,0,0.5)";
+			var halfUniverse = Math.floor(visibleUniverse/2);
+			for (var cellX = -halfUniverse; cellX < halfUniverse; cellX++){
+				for(var cellY = -halfUniverse; cellY < halfUniverse; cellY++){
+					if(this.universe.hasLife(cellX,cellY)){
+						var canvasX = cellX * cellSize + containerCanvas.width/2;
+						var canvasY = cellY * cellSize + containerCanvas.height/2;
+						context.fillRect(canvasX,canvasY,cellSize,cellSize);
+					}
+				}
+			};
+			universe.tick();
+		}
+	</script>
+</body>
+</html>
