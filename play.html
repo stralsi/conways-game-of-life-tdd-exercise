@@ -7,15 +7,16 @@
 	<script type="text/javascript" src="ConwaysGameOfLife.js"></script>
 	<script type="text/javascript">
 		
-		var cellSize = 10;
-		var visibleUniverse = 10;
+		var cellSize = 5;
+		var visibleUniverse = 100;
 		containerCanvas.width = cellSize * visibleUniverse;
 		containerCanvas.height = cellSize * visibleUniverse;
 
 		var universe;
 		function setup(){
-			this.universe = new Universe([[0,0],[0,1],[0,2]]);
-			setInterval(draw,1000);
+			this.universe = new Universe(createGlider());
+			draw();			
+			setInterval(draw,100);
 		}
 
 		function draw(){
@@ -33,6 +34,13 @@
 				}
 			};
 			universe.tick();
+		}
+
+		function createGlider(){
+			// O
+			//  O
+			//OOO
+			return [[0,0],[1,0],[2,0],[2,-1],[1,-2]]
 		}
 	</script>
 </body>
