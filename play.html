@@ -7,8 +7,8 @@
 	<script type="text/javascript" src="ConwaysGameOfLife.js"></script>
 	<script type="text/javascript">
 		
-		var cellSize = 5;
-		var visibleUniverse = 100;
+		var cellSize = 3;
+		var visibleUniverse = 200;
 		containerCanvas.width = cellSize * visibleUniverse;
 		containerCanvas.height = cellSize * visibleUniverse;
 
@@ -37,18 +37,30 @@
 		}
 
 		function createGlider(){
-			// O
-			//  O
+			//-O
+			//--O
 			//OOO
 			return [[0,0],[1,0],[2,0],[2,-1],[1,-2]];
 		}
 
 		function createRPentomino(){
-			// OO
+			//-OO
 			//OO
-			// O
+			//-O
 			return [[1,0],[0,-1],[1,-1],[1,-2],[2,-2]];
 		}
+
+		function createTwoBlockLayingSwitchEngines(){
+			//OOOOOOOO-OOOOO---OOO------OOOOOOO-OOOOO
+			return [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[9,0],[10,0],[11,0],[12,0],[13,0],[17,0],[18,0],[19,0],[26,0],[27,0],[28,0],[29,0],[30,0],[31,0],[32,0],[34,0],[35,0],[36,0],[37,0],[38,0]];	
+		}
+
+		function createDiehard(){
+			//------O-
+			//OO------
+			//-O---OOO
+			return [[1,0],[5,0],[6,0],[7,0],[0,-1],[1,-1],[6,-2]];	
+		}		
 
 	</script>
 </body>
