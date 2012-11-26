@@ -199,16 +199,16 @@
                 assert("should have 1 neighbour",cellsWith1NeighbourAsString.indexOf("-1,0") >= 0);
                 assert("should have 1 neighbour",cellsWith1NeighbourAsString.indexOf("-1,1") >= 0);
                 assert("should have 1 neighbour",cellsWith1NeighbourAsString.indexOf("-1,-1") >= 0);
-            }
+            }            
 
 //RULE 4:Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.  
-        // function test_tick_one_dead_cell_with_three_neighbours_lives(){
-        //     var initialState = [[1,1],[0,1],[1,0]];
-        //     var universe = new Universe(initialState);
+        function test_tick_one_dead_cell_with_three_neighbours_lives(){
+            var initialState = [[1,1],[0,1],[1,0]];
+            var universe = new Universe(initialState);
 
-        //     universe.tick();
-        //     assertTrue("cell must be alive",universe.hasLife(0,0));
-        // }
+            universe.tick();
+            assertTrue("cell must be alive",universe.hasLife(0,0));
+        }
 
         </script>
     </head>
