@@ -14,7 +14,7 @@
 
 		var universe;
 		function setup(){
-			this.universe = new Universe(createGlider());
+			this.universe = new Universe(createRPentomino());
 			draw();			
 			setInterval(draw,100);
 		}
@@ -40,8 +40,16 @@
 			// O
 			//  O
 			//OOO
-			return [[0,0],[1,0],[2,0],[2,-1],[1,-2]]
+			return [[0,0],[1,0],[2,0],[2,-1],[1,-2]];
 		}
+
+		function createRPentomino(){
+			// OO
+			//OO
+			// O
+			return [[1,0],[0,-1],[1,-1],[1,-2],[2,-2]];
+		}
+
 	</script>
 </body>
 </html>
